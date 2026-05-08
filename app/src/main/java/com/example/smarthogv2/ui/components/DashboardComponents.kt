@@ -58,6 +58,7 @@ fun SectionTitle(title: String, icon: ImageVector) {
 }
 
 @Composable
+
 fun ControlBtn(
     modifier: Modifier = Modifier,
     text: String,
@@ -65,18 +66,23 @@ fun ControlBtn(
     onClick: () -> Unit,
     enabled: Boolean = true,
     containerColor: Color,
-    contentColor: Color = PureBlack
+    contentColor: Color = PureWhite // Changed default to White for better contrast
 ) {
     Button(
         onClick = onClick,
         modifier = modifier.height(60.dp),
         enabled = enabled,
         shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = containerColor, contentColor = contentColor)
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = Color.Gray.copy(alpha = 0.3f)
+        ),
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp) // Added shadow
     ) {
-        Icon(icon, contentDescription = null)
-        Spacer(Modifier.width(4.dp))
-        Text(text, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+        Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(text, fontWeight = FontWeight.ExtraBold, fontSize = 13.sp)
     }
 }
 
